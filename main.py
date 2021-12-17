@@ -4,8 +4,6 @@ from datetime import date
 import streamlit as st
 import pandas as pd
 import requests
-import matplotlib.pyplot as plt
-import numpy as np
 
 bas_url = 'https://services1.arcgis.com/eNO7HHeQ3rUcBllm/arcgis/rest/services/Covid19CountyStatisticsHPSCIrelandOpenData/FeatureServer/0/query?where=1%3D1&outFields=CountyName,PopulationCensus16,ConfirmedCovidCases,PopulationProportionCovidCases&outSR=4326&f=json'
 response = requests.get(bas_url)
