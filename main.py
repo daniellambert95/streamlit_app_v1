@@ -50,11 +50,10 @@ pandas_table = {
 
 st.title('Covid-19 live cases web-app (Ireland)')
 st.subheader('Created by Daniel Lambert')
-st.write('The data below has been taken via an api created by the Irish government.')
+# st.write('')
 st.write('''
-Please refer to the index of numbers from 0-25 as a reference 
-for the corresponding county and it's data 
-in all the charts throughtout this app.
+The data located in the table below has been taken via an api created by the Irish government.
+The table consists of various values that are represented via bar charts for easier readability further down the page.
 ''')
 
 df = pd.DataFrame(pandas_table)
@@ -67,12 +66,15 @@ with the infected population highlighted on top.
 st.write('Note: Dublin(5) has a population more than twice the size of the next biggest county.')
 
 total_case_chart = {
+    'County': county_names,
     'Population unharmed': population_minus_infected,
     'Confirmed cases': confirmed_cases
 }
 
-total_cases_df = pd.DataFrame(total_case_chart)
-st.bar_chart(total_cases_df)
+df = pd.DataFrame(total_case_chart)
+df = df.groupby('County')[['Population unharmed', 'Confirmed cases']].sum()
+st.bar_chart(df)
+
 
 st.write('''
 Bar chart 2 - Shows the percentage of people 
@@ -81,9 +83,11 @@ that are infected in each county.
 st.write('Note: Wicklow(25) my home county has the largest infection rate.')
 
 infected_percentage = {
-    'Infected rate as a percentage': infection_rate,
+    'County': county_names,
+    'Infected rate (%)': infection_rate,
 }
 total_cases_df = pd.DataFrame(infected_percentage)
+total_cases_df = total_cases_df.groupby('County')['Infected rate (%)'].sum()
 st.bar_chart(total_cases_df)
 
 myslider = st.slider('Celsius to Fahrenheit calculator')
