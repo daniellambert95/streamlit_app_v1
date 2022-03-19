@@ -5,10 +5,10 @@ import streamlit as st
 import pandas as pd
 import requests
 
-bas_url = 'https://services1.arcgis.com/eNO7HHeQ3rUcBllm/arcgis/rest/services/Covid19CountyStatisticsHPSCIrelandOpenData/FeatureServer/0/query?where=1%3D1&outFields=CountyName,PopulationCensus16,ConfirmedCovidCases,PopulationProportionCovidCases&outSR=4326&f=json'
-response = requests.get(bas_url)
+base_url = 'https://services1.arcgis.com/eNO7HHeQ3rUcBllm/arcgis/rest/services/Covid19CountyStatisticsHPSCIrelandOpenData/FeatureServer/0/query?where=1%3D1&outFields=CountyName,PopulationCensus16,ConfirmedCovidCases,PopulationProportionCovidCases&outSR=4326&f=json'
+response = requests.get(base_url)
 print(response)
-get_json_response = requests.get(bas_url).json()
+get_json_response = requests.get(base_url).json()
 
 #  finding the outer most keys 
 # print(list(get_json_response))
@@ -80,7 +80,7 @@ st.write('''
 Bar chart 2 - Shows the percentage of people 
 that are infected in each county.
 ''')
-st.write('Note: Wicklow(25) my home county has the largest infection rate.')
+st.write('Note: Wicklow(25) my home county has the largest infection rate (Published 18.12.21).')
 
 infected_percentage = {
     'County': county_names,
